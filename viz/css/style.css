@@ -23,10 +23,10 @@ h2 {
 	font: Helvetica;
 	font-size: 20px;
 	font-weight: lighter;
-	text-align:left;
+	text-align:right;
 }
 
 p {
-  color: black;
-  text-align: center;
+  color: #262626;
+  text-align: left;
 }

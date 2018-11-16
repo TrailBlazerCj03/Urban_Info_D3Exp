@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+  <head>
+    <title>US election</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+
+    <script language="javascript" type="text/javascript" src="../js/d3plus/d3plus.js"></script>
+    <script language="javascript" type="text/javascript" src="../js/d3plus/d3plus.v2.js"></script>
+  </head>
+
+  <body>
+  	<img src="../Data/sky2.png" align="top" height="200" width="100%"> 
+  	<h1>US Election</h1>
+  	<p> Do people still support Trump in the US midterm selection?
+We classify the attitudes into three types and let each type be a specific value.<br>
+Trump supporters—-1<br>
+Netural—-0<br>
+Trump opposers—(-1)<br>
+<img src="../Data/graph.jpg" align="top" width="50%"> <br>
+For example, expressions like “Trump still president” are considered to be 1, “President Trump is
+helping Beijing win in the South China Sea” considered to be -1, ‘Tracking the president's visits to
+Trump properties’ are considered to be 0.  <br> To make the results
+readable, I use D3Plus sto visualize the results.
+  </body>
+
+  <script>
+  	var data = [
+  {id: "Supporters", x: "New York City", y:  43},
+  {id: "Supporters", x: "San Franscisco", y: 15},
+  {id: "Netural", x: "New York City", y: 4},
+  {id: "Netural",  x: "San Franscisco", y: 9},
+  {id: "Opposers",  x: "New York City", y:  12},
+  {id: "Opposers",  x: "San Franscisco", y: 22}
+];
+new d3plus.BarChart()
+  .data(data)
+  .stacked(true)
+  .render();
+  	
+  </script>
+</html>
