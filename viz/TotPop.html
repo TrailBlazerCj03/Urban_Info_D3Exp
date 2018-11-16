@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+  <head>
+    <title>Total Population</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+    <script language="javascript" type="text/javascript" src="../js/d3plus/d3plus.v2.js"></script>
+  </head>
+
+  <body>
+  	<img src="../Data/sky2.png" align="top" height="200" width="100%"> 
+    <h1>Total Population in important US Cities</h1>
+    <p> In this part, I mainly visulize the total population in some important us cities. <br>
+      I intended to draw the points of pick up position in Manhattan. The reason why I abandoned the taxi data is that the degree of the GeoMap that d3plus offers is not specific enough, which means that you are unable to pinpoint a census tract in Manhattan using this map. Thus, drawing 100 points and drawing one point that located in Manhattan looks the same. After realizing that, I decided to draw a map in a larger scale, the US entire coutry.<br>
+      I selected 20 important cities and visulize the population of them based on the data provided on the following references.<br>
+      The color scale configuration I set is "red", "orange", "yellow", "green", "purple", red represents the smallest, purple represents the largerst.
+    From the Geomap, I find that the New York City's population is much larger than anywhere else as there is even no green or blue point.<br>
+    
+    <br>Reference</p>
+
+    <p>  [1]<a href="https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml?">American FactFinder</a></p>
+    <p>  [2]<a href="http://worldpopulationreview.com/us-cities/">World Population Review </a></p><br>
+  </body>
+
+  <script>
+    const points = [
+  {
+    id: "New York",
+    "population": 8405837,
+    "rank": 1,
+    "state": "New York",
+    point: [
+      -74.0059413,
+      40.7127837
+    ]
+  },
+  {
+    id: "Los Angeles",
+    "population": 3884307,
+    "rank": 2,
+    "state": "California",
+    point: [
+      -118.2436849,
+      34.0522342
+    ]
+  },
+  {
+    id: "Chicago",
+    "population": 2718782,
+    "rank": 3,
+    "state": "Illinois",
+    point: [
+      -87.6297982,
+      41.8781136
+    ]
+  },
+  {
+    id: "Houston",
+    "population": 2195914,
+    "rank": 4,
+    "state": "Texas",
+    point: [
+      -95.3698028,
+      29.7604267
+    ]
+  },
+  {
+    id: "Philadelphia",
+    "population": 1553165,
+    "rank": 5,
+    "state": "Pennsylvania",
+    point: [
+      -75.1652215,
+      39.9525839
+    ]
+  },
+  {
+    id: "Phoenix",
+    "population": 1513367,
+    "rank": 6,
+    "state": "Arizona",
+    point: [
+      -112.0740373,
+      33.4483771
+    ]
+  },
+  {
+    id: "San Antonio",
+    "population": 1409019,
+    "rank": 7,
+    "state": "Texas",
+    point: [
+      -98.4936282,
+      29.4241219
+    ]
+  },
+  {
+    id: "San Diego",
+    "population": 1355896,
+    "rank": 8,
+    "state": "California",
+    point: [
+      -117.1610838,
+      32.715738
+    ]
+  },
+  {
+    id: "Dallas",
+    "population": 1257676,
+    "rank": 9,
+    "state": "Texas",
+    point: [
+      -96.7969879,
+      32.7766642
+    ]
+  },
+  {
+    id: "San Jose",
+    "population": 998537,
+    "rank": 10,
+    "state": "California",
+    point: [
+      -121.8863286,
+      37.3382082
+    ]
+  },
+  {
+    id: "Austin",
+    "population": 885400,
+    "rank": 11,
+    "state": "Texas",
+    point: [
+      -97.7430608,
+      30.267153
+    ]
+  },
+  {
+    id: "Indianapolis",
+    "population": 843393,
+    "rank": 12,
+    "state": "Indiana",
+    point: [
+      -86.158068,
+      39.768403
+    ]
+  },
+  {
+    id: "Jacksonville",
+    "population": 842583,
+    "rank": 13,
+    "state": "Florida",
+    point: [
+      -81.655651,
+      30.3321838
+    ]
+  },
+  {
+    id: "San Francisco",
+    "population": 837442,
+    "rank": 14,
+    "state": "California",
+    point: [
+      -122.4194155,
+      37.7749295
+    ]
+  },
+  {
+    id: "Columbus",
+    "population": 822553,
+    "rank": 15,
+    "state": "Ohio",
+    point: [
+      -82.9987942,
+      39.9611755
+    ]
+  },
+  {
+    id: "Charlotte",
+    "population": 792862,
+    "rank": 16,
+    "state": "North Carolina",
+    point: [
+      -80.8431267,
+      35.2270869
+    ]
+  },
+  {
+    id: "Fort Worth",
+    "population": 792727,
+    "rank": 17,
+    "state": "Texas",
+    point: [
+      -97.3307658,
+      32.7554883
+    ]
+  },
+  {
+    id: "Detroit",
+    "population": 688701,
+    "rank": 18,
+    "state": "Michigan",
+    point: [
+      -83.0457538,
+      42.331427
+    ]
+  },
+  {
+    id: "El Paso",
+    "population": 674433,
+    "rank": 19,
+    "state": "Texas",
+    point: [
+      -106.4424559,
+      31.7775757
+    ]
+  },
+  {
+    id: "Memphis",
+    "population": 653450,
+    "rank": 20,
+    "state": "Tennessee",
+    point: [
+      -90.0489801,
+      35.1495343
+    ]
+  }];
+    //   {id: "New York", value: 17.05, point: [-73.9938964844, 40.7501106262], country: "usa"},
+    //   {id: "New York", value: 17.8, point: [-74.0016479492, 40.7242431641], country:"usa"},
+    //   {id: "New York", value:10.8, point: [-73.9633407593, 40.8027877808], country:"usa"},
+    //   {id: "New York", value:4.8,  point: [-74.0090866089, 40.7138175964], country:"usa"},
+    //   {id: "New York", value:16.3, point: [-73.9711761475, 40.7624282837], country:"usa"},
+    //   {id: "Los Angeles", value: 2602, point: [-117.9190, 33.8121], country: "usa"}
+    // ];
+  //    const points = [
+
+  //   {id: "New York", value: 1834, point: [-73.9609, 40.8084], country: "usa"},
+  //   {id: "Los Angeles", value: 2602, point: [-117.9190, 33.8121], country: "usa"}
+  // ];
+  let geomap = new d3plus.Geomap()
+    .data(points)
+    .ocean("#eef")
+    .tiles(true)
+    .colorScaleConfig({
+    color: ["red", "orange", "yellow", "green", "purple"]
+  })
+    .colorScale("population")
+    // .pointSize("rank")
+    .label(function(d) {
+    return d.id + ", " +d.state
+  })
+
+    .render();
+  	
+  </script>
+
